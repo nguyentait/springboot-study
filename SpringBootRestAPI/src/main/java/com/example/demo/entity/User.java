@@ -22,18 +22,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "full_name")
     private String name;
+
     @Column(name = "email", unique = true)
     private String email;
+
     @Column(name = "phone",length = 11)
     private String phone;
+
     @Column(name = "avatar", nullable = true)
     private String avatar;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "birthday")
     private Date birthday;
+
     @Column(name = "role", columnDefinition = "varchar(255) default 'USER'")
     private String role;
+
+    @OneToOne
+    @JoinColumn(name = "identity_card_id")
+    private IdentityCard identityCard;
 }

@@ -2,15 +2,18 @@ package com.example.demo;
 
 import com.example.demo.controller.UserController;
 import com.example.demo.entity.Car;
+import com.example.demo.entity.IdentityCard;
 import com.example.demo.entity.User;
 import com.example.demo.repository.CarRepository;
+import com.example.demo.repository.IdentityCardRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.request.CreateUserReq;
+import com.example.demo.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +31,11 @@ public class DemoApplication implements CommandLineRunner {
 	private CarRepository carRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private IUserService userService;
+	@Autowired
+	private IdentityCardRepository identityCardRepository;
+
 	@Override
 	public void run(String... args) throws Exception {
 		Car car = new Car();
@@ -42,20 +50,34 @@ public class DemoApplication implements CommandLineRunner {
 		Optional<Car> getCar = carRepository.findById(1);
 		System.out.println(getCar.get().toString());
 
-		User user1 = new User(1L,"Nguyen Van A","nguyenvana@gmail.com",
-				"12345679","avatar.jpg","123456",new Date(),"USER");
-		User user2 = new User(2L,"Nguyen Van B","nguyenvanb@gmail.com",
-				"12345679","avatar.jpg","123456",new Date(),"USER");
-		User user3 = new User(3L,"Nguyen Van C","nguyenvanc@gmail.com",
-				"12345679","avatar.jpg","123456",new Date(),"USER");
-		User user4 = new User(4L,"Nguyen Van D","nguyenvand@gmail.com",
-				"12345679","avatar.jpg","123456",new Date(),"USER");
-		User user5 = new User(5L,"Nguyen Van E","nguyenvane@gmail.com",
-				"12345679","avatar.jpg","123456",new Date(),"USER");
-		userRepository.save(user1);
-		userRepository.save(user2);
-		userRepository.save(user3);
-		userRepository.save(user4);
-		userRepository.save(user5);
+		CreateUserReq user1 = new CreateUserReq("Nguyen Van A","nva@gmail.com",
+				"1234567890","avatar.jpg","123456");
+		CreateUserReq user2 = new CreateUserReq("Nguyen Van B","nvb@gmail.com",
+				"1234567890","avatar.jpg","123456");
+		CreateUserReq user3 = new CreateUserReq("Nguyen Van C","nvc@gmail.com",
+				"1234567890",null,"123456");
+		CreateUserReq user4 = new CreateUserReq("Nguyen Van D","nvd@gmail.com",
+				"1234567890",null,"123456");
+		CreateUserReq user5 = new CreateUserReq("Nguyen Van E","nve@gmail.com",
+				"1234567890",null,"123456");
+
+		userService.createUser(user1);
+		userService.createUser(user2);
+		userService.createUser(user3);
+		userService.createUser(user4);
+		userService.createUser(user5);
+
+
+		IdentityCard idc = new IdentityCard();
+		idc.setId("ABC123");
+		idc.setExpired(new Date());
+		idc.setIssued(new Date());
+
+		// Lưu idc vào database
+		identityCardRepository.save(idc);
+		User u = userRepository.findById(1L).get();
+		u.setIdentityCard(idc);
+		userRepository.save(u);
+		System.out.println(u);
 	}
 }

@@ -63,8 +63,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserDto createUser(CreateUserReq req) {
-        Optional<User> userTemp = userRepository.findByEmail(req.getEmail());
-        if(userTemp.isEmpty()){
+        Optional<User> rs = userRepository.findByEmail(req.getEmail());
+        if(rs.isEmpty()){
             User user = new User();
             user.setName(req.getName());
             user.setEmail(req.getEmail());
