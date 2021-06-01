@@ -37,46 +37,46 @@ public class DemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Car car = new Car();
-		car.setName("Ford Tourneo Titanium");
-		ArrayList<String> images = new ArrayList<>();
-		images.add("img1.jpg");
-		images.add("img2.jpg");
-		car.setImages(images);
-		Car.Engine engine = new Car.Engine(220,"2.0 ecoboots");
-		car.setEngine(engine);
-		carRepository.save(car);
-		Optional<Car> getCar = carRepository.findById(1);
-		System.out.println(getCar.get().toString());
-
-		CreateUserReq user1 = new CreateUserReq("Nguyen Van A","nva@gmail.com",
-				"1234567890","avatar.jpg","123456");
-		CreateUserReq user2 = new CreateUserReq("Nguyen Van B","nvb@gmail.com",
-				"1234567890","avatar.jpg","123456");
-		CreateUserReq user3 = new CreateUserReq("Nguyen Van C","nvc@gmail.com",
-				"1234567890",null,"123456");
-		CreateUserReq user4 = new CreateUserReq("Nguyen Van D","nvd@gmail.com",
-				"1234567890",null,"123456");
-		CreateUserReq user5 = new CreateUserReq("Nguyen Van E","nve@gmail.com",
-				"1234567890",null,"123456");
-
-		userService.createUser(user1);
-		userService.createUser(user2);
-		userService.createUser(user3);
-		userService.createUser(user4);
-		userService.createUser(user5);
-
-
-		IdentityCard idc = new IdentityCard();
-		idc.setId("ABC123");
-		idc.setExpired(new Date());
-		idc.setIssued(new Date());
-
-		// Lưu idc vào database
-		identityCardRepository.save(idc);
-		User u = userRepository.findById(1L).get();
-		u.setIdentityCard(idc);
-		userRepository.save(u);
-		System.out.println(u);
+//		Car car = new Car();
+//		car.setName("Ford Tourneo Titanium");
+//		ArrayList<String> images = new ArrayList<>();
+//		images.add("img1.jpg");
+//		images.add("img2.jpg");
+//		car.setImages(images);
+//		Car.Engine engine = new Car.Engine(220,"2.0 ecoboots");
+//		car.setEngine(engine);
+//		carRepository.save(car);
+//		Optional<Car> getCar = carRepository.findById(1);
+//		System.out.println(getCar.get().toString());
+//
+//		CreateUserReq user1 = new CreateUserReq("Nguyen Van A","nva@gmail.com",
+//				"1234567890","avatar.jpg","123456");
+//		CreateUserReq user2 = new CreateUserReq("Nguyen Van B","nvb@gmail.com",
+//				"1234567890","avatar.jpg","123456");
+//		CreateUserReq user3 = new CreateUserReq("Nguyen Van C","nvc@gmail.com",
+//				"1234567890",null,"123456");
+//		CreateUserReq user4 = new CreateUserReq("Nguyen Van D","nvd@gmail.com",
+//				"1234567890",null,"123456");
+//		CreateUserReq user5 = new CreateUserReq("Nguyen Van E","nve@gmail.com",
+//				"1234567890",null,"123456");
+//
+//		userService.createUser(user1);
+//		userService.createUser(user2);
+//		userService.createUser(user3);
+//		userService.createUser(user4);
+//		userService.createUser(user5);
+//
+//
+//		IdentityCard idc = new IdentityCard();
+//		idc.setId("ABC123");
+//		idc.setExpired(new Date());
+//		idc.setIssued(new Date());
+//
+//		// Lưu idc vào database
+//		identityCardRepository.save(idc);
+//		User u = userRepository.findById(1L).get();
+////		u.setIdentityCard(idc);
+//		userRepository.save(u);
+//		System.out.println(u);
 	}
 }

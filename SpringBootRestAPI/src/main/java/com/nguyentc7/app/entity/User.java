@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -46,4 +47,7 @@ public class User {
     @OneToOne
     @JoinColumn(name = "identity_card_id")
     private IdentityCard identityCard;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> order;
 }
