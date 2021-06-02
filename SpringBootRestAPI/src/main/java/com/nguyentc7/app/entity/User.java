@@ -50,4 +50,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Order> order;
+
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> books;
 }
